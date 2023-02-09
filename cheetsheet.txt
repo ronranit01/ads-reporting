@@ -1,0 +1,59 @@
+for all_row in ws:
+data.append(all_row)
+data.append(col.value)
+for col2, val in enumerate(data, start=1):
+new.cell(row=col2, column=col2).value = data[col2 - 1]
+
+
+from openpyxl import Workbook, load_workbook
+
+
+# grab = ['ad name', 'amount spent', 'cost', 'Purchase', 'cpm', 'cpc', 'unique ctr', 'reach', 'impression', 'hook', 'hold']
+grab = ['ron', 'ranit', 'macapanas']
+
+
+wb = load_workbook('testing.xlsx')
+ws = wb['facebook']
+new = wb['awaw']
+data = []
+
+for first_row in ws.iter_rows(max_row=1):
+    # print(first_row)
+    for index, first_row_col in enumerate(first_row):
+        if first_row_col.value in grab:
+            for all_row in ws:
+                data.append(all_row)
+    #
+    #     else:
+    #         print("Wala")
+print(data)
+wb.save('testing.xlsx')
+
+    for index, row in df[:10].iterrows():
+        st.header(row["title"])
+        st.write(row["description"])
+        st.image(f"images/{row['image']}", width=300)
+        st.write(f"[Source Code]({row['url']})")
+
+max = ws.max_row
+for row, entry in enumerate(data1, start=1):
+   new.cell(row=row+max, column=1, value=entry)
+
+
+# Pandas Drop rows with condition
+for index, x in enumerate(data_read_pandas):
+    if x not in grab:
+        del data_read_pandas[x]
+
+# Pandas create new workbook and add the DataFrame
+data_read_pandas.to_excel('new.xlsx', index=False)
+
+
+df = data_read_pandas[pd.notnull(data_read_pandas['Purchases'])]  # Get all rows of Purchases that have not 0 or
+# NaN
+
+df.sort_values(by='Amount spent (USD)', ascending=False).head(20).to_excel('Facebook Report.xlsx', index=False)
+
+# data_read_pandas.to_excel('Facebook Report.xlsx', index=False)
+
+# wb.save(filename='testing.xlsx')
